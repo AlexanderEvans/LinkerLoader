@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LinkerLoader": {
+      "commandName": "Project",
+      "commandLineArgs": "a.out TextFile1.txt"
+    }
+  }
+}

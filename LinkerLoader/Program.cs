@@ -22,20 +22,20 @@ namespace LinkerLoader
             }
 
             int rtnVal = LoadAndLink(fileNames, outputFileName);
-            dumpMemory();
+            dumpMemory("../../../" + outputFileName);
             return rtnVal;
         }
 
-        static void dumpMemory()
+        static void dumpMemory(string filePath = "")
         {
             int curLineAddr = loadAdress;
 
-            Chronicler.WriteLine("ADDRES  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F");
+            Chronicler.WriteLine("ADDRESS  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F");
 
-            for(int i = 0; i<memoryTable.Count;i++)
+            for (int i = 0; i < memoryTable.Count; i++)
             {
                 if (i % 32 == 0)
-                    Chronicler.Write(curLineAddr.ToString("X6"));
+                    Chronicler.Write(curLineAddr.ToString("X6") + " ");
                 if (i % 2 == 0)
                 {
                     curLineAddr++;
@@ -45,6 +45,28 @@ namespace LinkerLoader
                     Chronicler.Write(memoryTable[i].ToString());
                 if (i % 32 == 31)
                     Chronicler.Write("\n");
+            }
+            if(filePath!="")
+            {
+                StreamWriter streamWriter = new StreamWriter(filePath, false);
+
+                streamWriter.WriteLine("ADDRESS  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F");
+
+                for (int i = 0; i < memoryTable.Count; i++)
+                {
+                    if (i % 32 == 0)
+                        streamWriter.Write(curLineAddr.ToString("X6") + " ");
+                    if (i % 2 == 0)
+                    {
+                        curLineAddr++;
+                        streamWriter.Write(" " + memoryTable[i]);
+                    }
+                    else
+                        streamWriter.Write(memoryTable[i].ToString());
+                    if (i % 32 == 31)
+                        streamWriter.Write("\n");
+                }
+                streamWriter.Close();
             }
         }
 

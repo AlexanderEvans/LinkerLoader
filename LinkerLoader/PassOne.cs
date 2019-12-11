@@ -106,7 +106,7 @@ namespace LinkerLoader
             string buffer = v;
             while (buffer != "")
             {
-                string symbolName = buffer.Length <= 6 ? buffer.Trim() : buffer.Substring(0, 6).Trim(); ;
+                string symbolName = buffer.Length <= 6 ? buffer.Trim() : buffer.Substring(0, 6).Trim();
                 buffer = buffer.Length >= 6 ? buffer.Remove(0, 6).Trim() : "";
                 symRefs.Add(symbolName);
             }

@@ -46,7 +46,8 @@ namespace LinkerLoader
                 if (i % 32 == 31)
                     Chronicler.Write("\n");
             }
-            if(filePath!="")
+            Chronicler.WriteLine("First executable adress: " + firstExecutableInstruction);
+            if (filePath!="")
             {
                 StreamWriter streamWriter = new StreamWriter(filePath, false);
 
@@ -66,6 +67,7 @@ namespace LinkerLoader
                     if (i % 32 == 31)
                         streamWriter.Write("\n");
                 }
+                streamWriter.WriteLine("First executable adress: " + firstExecutableInstruction);
                 streamWriter.Close();
             }
         }
